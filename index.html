@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Semana de Provas da Lara</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --roxo:#7c3aed; --rosa:#ec4899; --laranja:#f97316; --amarelo:#facc15;
+  --verde:#22c55e; --azul:#3b82f6; --ciano:#06b6d4; --vermelho:#ef4444;
+  --tinta:#2e1065; --papel:#fffdf7;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%}
+body{
+  font-family:'Fredoka',system-ui,sans-serif;color:var(--tinta);
+  background:linear-gradient(160deg,#c4b5fd 0%,#fbcfe8 45%,#fde68a 100%);
+  background-attachment:fixed;min-height:100vh;overflow-x:hidden;
+}
+body::before{ /* bolinhas no fundo */
+  content:"";position:fixed;inset:0;pointer-events:none;opacity:.35;
+  background-image:radial-gradient(#fff 2px,transparent 2.5px);background-size:28px 28px;
+}
+button{font-family:inherit;cursor:pointer;border:none}
+.wrap{max-width:860px;margin:0 auto;padding:16px 14px 40px;position:relative}
+.screen{display:none;animation:entra .4s ease}
+.screen.on{display:block}
+@keyframes entra{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+
+/* ===== topo ===== */
+.topo{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:14px;flex-wrap:wrap}
+.chip{background:#fff;border-radius:999px;padding:8px 14px;font-weight:600;box-shadow:0 4px 0 rgba(46,16,101,.15);display:flex;align-items:center;gap:6px;font-size:16px}
+.iconbtn{background:#fff;border-radius:50%;width:44px;height:44px;font-size:20px;box-shadow:0 4px 0 rgba(46,16,101,.15);transition:transform .1s}
+.iconbtn:active{transform:translateY(3px);box-shadow:0 1px 0 rgba(46,16,101,.15)}
+
+/* ===== capa ===== */
+.capa{text-align:center;padding:26px 10px 10px}
+.logo{font-size:clamp(30px,7vw,54px);font-weight:700;line-height:1.05;color:#fff;
+  text-shadow:0 4px 0 var(--roxo),0 8px 0 rgba(46,16,101,.25);letter-spacing:.5px}
+.logo span{color:var(--amarelo)}
+.sub{margin-top:10px;font-size:18px;font-weight:500}
+.mascote{font-size:86px;display:inline-block;animation:pula 1.6s ease-in-out infinite;filter:drop-shadow(0 8px 0 rgba(46,16,101,.15))}
+@keyframes pula{0%,100%{transform:translateY(0) rotate(-4deg)}50%{transform:translateY(-12px) rotate(4deg)}}
+.balao{background:#fff;border-radius:22px;padding:14px 18px;display:inline-block;max-width:520px;margin:6px auto 0;
+  box-shadow:0 5px 0 rgba(46,16,101,.15);font-size:17px;position:relative}
+.balao::before{content:"";position:absolute;top:-12px;left:50%;margin-left:-12px;border:12px solid transparent;border-top:0;border-bottom-color:#fff}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border-radius:18px;padding:14px 26px;font-size:20px;font-weight:700;color:#fff;
+  background:var(--roxo);box-shadow:0 6px 0 #4c1d95;transition:transform .1s,box-shadow .1s}
+.btn:active{transform:translateY(4px);box-shadow:0 2px 0 #4c1d95}
+.btn.verde{background:var(--verde);box-shadow:0 6px 0 #15803d}
+.btn.verde:active{box-shadow:0 2px 0 #15803d}
+.btn.laranja{background:var(--laranja);box-shadow:0 6px 0 #c2410c}
+.btn.laranja:active{box-shadow:0 2px 0 #c2410c}
+.btn.branco{background:#fff;color:var(--tinta);box-shadow:0 6px 0 rgba(46,16,101,.2)}
+.btn.pequeno{font-size:16px;padding:10px 16px;border-radius:14px}
+.grande{margin-top:22px;font-size:24px;padding:18px 38px}
+
+/* ===== mapa ===== */
+h2.titulo{font-size:28px;color:#fff;text-shadow:0 3px 0 var(--roxo);margin:4px 0 14px;text-align:center}
+.mapa{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:16px}
+.fase{position:relative;border-radius:24px;padding:18px 16px 16px;color:#fff;text-align:left;min-height:150px;
+  box-shadow:0 7px 0 rgba(0,0,0,.18);transition:transform .15s;overflow:hidden}
+.fase:hover:not(.trancada){transform:translateY(-4px) rotate(-.5deg)}
+.fase .num{position:absolute;right:14px;top:10px;font-size:46px;font-weight:700;opacity:.25}
+.fase .ico{font-size:40px}
+.fase .nome{font-size:21px;font-weight:700;margin-top:4px;line-height:1.1}
+.fase .desc{font-size:14px;opacity:.95;margin-top:4px}
+.fase .estrelas{margin-top:10px;font-size:22px;letter-spacing:2px}
+.fase .nivel{display:inline-block;margin-top:8px;background:rgba(255,255,255,.28);border-radius:999px;padding:2px 10px;font-size:13px;font-weight:600}
+.fase.trancada{filter:grayscale(.9) brightness(.9);cursor:not-allowed}
+.fase.trancada::after{content:"🔒";position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:54px;background:rgba(255,255,255,.25)}
+.fase.nova{animation:brilha 1.4s ease-in-out infinite}
+@keyframes brilha{0%,100%{box-shadow:0 7px 0 rgba(0,0,0,.18),0 0 0 0 rgba(250,204,21,.9)}50%{box-shadow:0 7px 0 rgba(0,0,0,.18),0 0 0 8px rgba(250,204,21,.0)}}
+
+.mat-card{cursor:default}
+.mat-card .acoes{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap}
+.mat-card .acoes button,.mat-card .acoes a{background:rgba(255,255,255,.95);color:var(--tinta);border-radius:12px;padding:8px 12px;font-weight:700;font-size:15px;text-decoration:none;box-shadow:0 4px 0 rgba(0,0,0,.15)}
+.mat-card .prog{margin-top:8px;height:10px;background:rgba(255,255,255,.35);border-radius:999px;overflow:hidden}
+.mat-card .prog i{display:block;height:100%;background:#fff;border-radius:999px}
+/* ===== resumo da fase ===== */
+.cartao{background:var(--papel);border-radius:26px;padding:20px;box-shadow:0 8px 0 rgba(46,16,101,.15)}
+.resumo-top{display:flex;align-items:center;gap:12px;margin-bottom:12px}
+.resumo-top .ico{font-size:46px}
+.resumo-top h3{font-size:26px}
+.caixas{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin:12px 0 18px}
+.caixa{border-radius:18px;padding:14px;border:3px solid;background:#fff}
+.caixa b{display:block;font-size:18px;margin-bottom:4px}
+.caixa .ex{margin-top:8px;font-size:15px;border-radius:10px;padding:6px 10px;background:rgba(0,0,0,.04)}
+.regras{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-bottom:14px}
+.regras .chip{font-size:14px}
+
+/* ===== quiz ===== */
+.barra{height:16px;background:rgba(255,255,255,.6);border-radius:999px;overflow:hidden;margin:4px 0 14px;box-shadow:inset 0 2px 0 rgba(0,0,0,.08)}
+.barra i{display:block;height:100%;width:0;border-radius:999px;transition:width .5s;background:linear-gradient(90deg,var(--verde),var(--amarelo))}
+.pergunta-card{background:var(--papel);border-radius:26px;padding:20px 18px;box-shadow:0 8px 0 rgba(46,16,101,.15);position:relative}
+.etiquetas{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px}
+.tag{border-radius:999px;padding:4px 12px;font-size:14px;font-weight:600;color:#fff}
+.enunciado{font-size:clamp(19px,3.4vw,24px);font-weight:600;line-height:1.3}
+.enunciado em{font-style:normal;background:#fef08a;padding:0 6px;border-radius:8px}
+.visual{margin:14px 0 4px}
+.opcoes{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:16px}
+@media(max-width:560px){.opcoes{grid-template-columns:1fr}}
+.op{display:flex;align-items:center;gap:12px;text-align:left;background:#fff;border-radius:18px;padding:14px;font-size:18px;font-weight:500;color:var(--tinta);
+  border:3px solid #e9d5ff;box-shadow:0 5px 0 #e9d5ff;transition:transform .1s,background .2s,border-color .2s}
+.op:hover:not(:disabled){transform:translateY(-2px);border-color:var(--roxo)}
+.op:active:not(:disabled){transform:translateY(3px);box-shadow:0 2px 0 #e9d5ff}
+.op .letra{flex:0 0 38px;height:38px;border-radius:12px;color:#fff;font-weight:700;display:flex;align-items:center;justify-content:center;font-size:18px}
+.op.certa{background:#dcfce7;border-color:var(--verde);box-shadow:0 5px 0 #86efac;animation:festa .5s}
+.op.errada{background:#fee2e2;border-color:var(--vermelho);box-shadow:0 5px 0 #fca5a5;animation:treme .45s}
+.op.sumiu{opacity:.25;transform:scale(.96)}
+@keyframes treme{0%,100%{transform:translateX(0)}20%{transform:translateX(-8px)}40%{transform:translateX(8px)}60%{transform:translateX(-6px)}80%{transform:translateX(6px)}}
+@keyframes festa{0%{transform:scale(1)}40%{transform:scale(1.06)}100%{transform:scale(1)}}
+.ajudas{display:flex;gap:10px;justify-content:center;margin-top:16px;flex-wrap:wrap}
+.ajuda{background:#fff;border-radius:16px;padding:10px 16px;font-size:16px;font-weight:600;color:var(--tinta);box-shadow:0 5px 0 rgba(46,16,101,.15);border:3px solid var(--amarelo)}
+.ajuda.c50{border-color:var(--ciano)}
+.ajuda:disabled{opacity:.4;cursor:not-allowed}
+.coruja-dica{display:flex;align-items:flex-start;gap:10px;margin-top:14px}
+.coruja-dica .mini{font-size:42px;animation:pula 1.6s infinite}
+.coruja-dica .fala{background:#fef9c3;border:3px dashed #eab308;border-radius:18px;padding:10px 14px;font-size:16px;flex:1}
+.hidden{display:none!important}
+
+/* feedback */
+.feedback{position:fixed;left:0;right:0;bottom:0;z-index:20;padding:18px 16px 22px;transform:translateY(110%);transition:transform .35s cubic-bezier(.2,1.4,.4,1);
+  box-shadow:0 -6px 0 rgba(0,0,0,.08)}
+.feedback.on{transform:none}
+.feedback.ok{background:#dcfce7}
+.feedback.nok{background:#fee2e2}
+.feedback .in{max-width:860px;margin:0 auto;display:flex;gap:14px;align-items:center;flex-wrap:wrap}
+.feedback .emoji{font-size:48px}
+.feedback .txt{flex:1;min-width:220px}
+.feedback h4{font-size:24px}
+.feedback.ok h4{color:#15803d}.feedback.nok h4{color:#b91c1c}
+.feedback p{font-size:16px;margin-top:4px}
+.pontos-voa{position:fixed;font-size:28px;font-weight:700;color:var(--verde);pointer-events:none;z-index:30;animation:voa 1s forwards;text-shadow:0 2px 0 #fff}
+@keyframes voa{to{transform:translateY(-80px);opacity:0}}
+
+/* visuais: tabela, gráfico, teatro */
+.tabela{width:100%;max-width:420px;border-collapse:separate;border-spacing:0;border-radius:14px;overflow:hidden;font-size:17px;margin:0 auto;box-shadow:0 4px 0 rgba(0,0,0,.08)}
+.tabela caption{font-weight:700;margin-bottom:6px;font-size:16px}
+.tabela th{background:var(--azul);color:#fff;padding:8px 12px;text-align:left}
+.tabela td{padding:7px 12px;background:#fff;border-top:2px solid #dbeafe}
+.tabela tr:nth-child(even) td{background:#eff6ff}
+.fonte{font-size:13px;text-align:center;margin-top:6px;opacity:.75}
+.grafico{display:block;margin:0 auto;max-width:420px;width:100%}
+.teatro{background:#fff7ed;border:3px solid var(--laranja);border-radius:16px;padding:14px 16px;font-size:16px;line-height:1.55;max-width:560px;margin:0 auto}
+.teatro .cena{font-weight:700;color:#c2410c;margin-bottom:6px}
+.teatro .rub{font-style:italic;color:#9a3412}
+.teatro .per{font-weight:700}
+
+/* resultado */
+.resultado{text-align:center}
+.grandes-estrelas{font-size:64px;letter-spacing:8px;margin:8px 0}
+.grandes-estrelas span{display:inline-block;opacity:.2;transform:scale(.4);transition:all .45s cubic-bezier(.2,1.6,.4,1)}
+.grandes-estrelas span.acesa{opacity:1;transform:scale(1)}
+.placar{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin:12px 0 18px}
+.placar .chip{font-size:17px}
+.botoes{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.revisao{margin-top:18px;text-align:left;display:grid;gap:10px}
+.revisao .item{background:#fff;border-left:8px solid var(--vermelho);border-radius:14px;padding:12px 14px}
+.revisao .item .r{color:#15803d;font-weight:600;margin-top:4px}
+
+/* modal */
+.modal{position:fixed;inset:0;background:rgba(46,16,101,.45);display:none;align-items:center;justify-content:center;z-index:40;padding:16px}
+.modal.on{display:flex}
+.modal .cartao{max-width:380px;text-align:center}
+.modal p{font-size:18px;margin:10px 0 16px}
+
+canvas#confete{position:fixed;inset:0;pointer-events:none;z-index:50}
+</style>
+</head>
+<body>
+<canvas id="confete"></canvas>
+<div class="wrap">
+
+  <!-- CAPA -->
+  <section id="tela-capa" class="screen on">
+    <div class="topo" style="justify-content:flex-end"><button class="iconbtn" data-som title="Som">🔊</button></div>
+    <div class="capa">
+      <div class="mascote">🦉</div>
+      <h1 class="logo">Semana de<br><span>Provas</span> da Lara</h1>
+      <p class="sub">Jogos e simulados para arrasar em todas as provas! ✨</p>
+      <div class="balao" style="margin-top:20px">Oi, Lara! Eu sou a <b>Coruja Sabidinha</b>. 🦉<br>Escolha a matéria, passe pelas fases, ganhe estrelas ⭐ e faça o <b>simulado</b> no final!</div>
+      <br>
+      <button class="btn grande verde" id="btn-jogar">▶ Jogar!</button>
+    </div>
+  </section>
+
+  <!-- MATÉRIAS -->
+  <section id="tela-materias" class="screen">
+    <div class="topo">
+      <button class="iconbtn" id="mat-voltar" title="Início">🏠</button>
+      <div class="chip">⭐ <span id="mat-estrelas">0</span></div>
+      <button class="iconbtn" data-som title="Som">🔊</button>
+    </div>
+    <h2 class="titulo">📚 Escolha a matéria</h2>
+    <div class="mapa" id="materias"></div>
+  </section>
+
+  <!-- MAPA -->
+  <section id="tela-mapa" class="screen">
+    <div class="topo">
+      <button class="iconbtn" id="mapa-voltar" title="Matérias">⬅️</button>
+      <div style="display:flex;gap:8px;flex-wrap:wrap">
+        <div class="chip">⭐ <span id="tot-estrelas">0</span></div>
+        <div class="chip">🏆 <span id="tot-pontos">0</span></div>
+      </div>
+      <div style="display:flex;gap:8px">
+        <button class="iconbtn" data-som title="Som">🔊</button>
+        <button class="iconbtn" id="btn-reset" title="Recomeçar">♻️</button>
+      </div>
+    </div>
+    <h2 class="titulo" id="mapa-titulo">🗺️ Mapa das Fases</h2>
+    <div style="text-align:center;margin:-4px 0 16px"><a class="btn laranja pequeno" id="mapa-sim" href="simulado.html" style="text-decoration:none">📝 Fazer o Simulado desta matéria</a></div>
+    <div class="mapa" id="mapa"></div>
+  </section>
+
+  <!-- RESUMO -->
+  <section id="tela-resumo" class="screen">
+    <div class="topo"><button class="iconbtn" data-ir="mapa" title="Mapa">⬅️</button><button class="iconbtn" data-som title="Som">🔊</button></div>
+    <div class="cartao">
+      <div class="resumo-top"><div class="ico" id="res-ico"></div><div><div style="font-size:14px;font-weight:600;opacity:.7">CAIXINHA DO RESUMO</div><h3 id="res-nome"></h3></div></div>
+      <div class="caixas" id="res-caixas"></div>
+      <div class="regras">
+        <div class="chip">❤️❤️❤️ 3 vidas</div>
+        <div class="chip">💡 3 dicas</div>
+        <div class="chip">✂️ 1 corte 50/50</div>
+        <div class="chip">🟢→🟡→🔴 fica mais difícil!</div>
+      </div>
+      <div style="text-align:center"><button class="btn grande verde" id="btn-comecar">Começar! 🚀</button></div>
+    </div>
+  </section>
+
+  <!-- QUIZ -->
+  <section id="tela-quiz" class="screen">
+    <div class="topo">
+      <button class="iconbtn" id="quiz-sair" title="Sair">✖️</button>
+      <div class="chip" id="q-fase"></div>
+      <div style="display:flex;gap:8px">
+        <div class="chip" id="q-vidas">❤️❤️❤️</div>
+        <div class="chip">🏆 <span id="q-pontos">0</span></div>
+        <button class="iconbtn" data-som title="Som">🔊</button>
+      </div>
+    </div>
+    <div class="barra"><i id="q-barra"></i></div>
+    <div class="pergunta-card">
+      <div class="etiquetas" id="q-tags"></div>
+      <div class="enunciado" id="q-texto"></div>
+      <div class="visual" id="q-visual"></div>
+      <div class="opcoes" id="q-opcoes"></div>
+      <div class="coruja-dica hidden" id="q-dica"><div class="mini">🦉</div><div class="fala" id="q-dica-txt"></div></div>
+      <div class="ajudas">
+        <button class="ajuda" id="btn-dica">💡 Dica (<span id="n-dicas">3</span>)</button>
+        <button class="ajuda c50" id="btn-50">✂️ 50/50 (<span id="n-50">1</span>)</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- RESULTADO -->
+  <section id="tela-resultado" class="screen">
+    <div class="cartao resultado">
+      <div class="mascote" id="r-mascote" style="font-size:70px">🦉</div>
+      <h2 id="r-titulo" style="font-size:30px"></h2>
+      <div class="grandes-estrelas" id="r-estrelas"><span>⭐</span><span>⭐</span><span>⭐</span></div>
+      <p id="r-msg" style="font-size:18px"></p>
+      <div class="placar" id="r-placar"></div>
+      <div class="botoes" id="r-botoes"></div>
+      <div class="revisao" id="r-revisao"></div>
+    </div>
+  </section>
+</div>
+
+<!-- feedback -->
+<div class="feedback" id="feedback"><div class="in">
+  <div class="emoji" id="fb-emoji"></div>
+  <div class="txt"><h4 id="fb-titulo"></h4><p id="fb-exp"></p></div>
+  <button class="btn" id="fb-continuar">Continuar ➜</button>
+</div></div>
+
+<!-- modal -->
+<div class="modal" id="modal"><div class="cartao">
+  <div style="font-size:48px">🦉</div><p id="modal-txt"></p>
+  <div class="botoes"><button class="btn branco pequeno" id="modal-nao">Não</button><button class="btn laranja pequeno" id="modal-sim">Sim</button></div>
+</div></div>
+
+<script src="dados.js"></script>
+<script>
+let FASES=[], MAT=null;
+
+/* ================== SONS (Web Audio) ================== */
+let AC=null, somOn=true;
+function ac(){ if(!AC){ try{AC=new (window.AudioContext||window.webkitAudioContext)();}catch(e){} } if(AC&&AC.state==='suspended') AC.resume(); return AC; }
+function tom(f,ini,dur,tipo='sine',vol=.18){
+  const c=ac(); if(!c||!somOn) return;
+  const o=c.createOscillator(), g=c.createGain(); o.type=tipo; o.frequency.value=f;
+  const t=c.currentTime+ini; g.gain.setValueAtTime(0,t); g.gain.linearRampToValueAtTime(vol,t+.02); g.gain.exponentialRampToValueAtTime(.001,t+dur);
+  o.connect(g); g.connect(c.destination); o.start(t); o.stop(t+dur+.05);
+}
+const SOM={
+  clique(){tom(660,0,.08,'triangle',.12)},
+  certo(){[523,659,784,1046].forEach((f,i)=>tom(f,i*.08,.25,'triangle'))},
+  errado(){tom(300,0,.2,'sawtooth',.1);tom(220,.15,.3,'sawtooth',.1)},
+  dica(){[1200,1500,1800].forEach((f,i)=>tom(f,i*.07,.2,'sine',.1))},
+  corte(){tom(900,0,.06,'square',.08);tom(500,.08,.08,'square',.08)},
+  vitoria(){[523,523,523,659,784,659,784,1046].forEach((f,i)=>tom(f,i*.12,.3,'triangle',.16))},
+  perdeu(){[440,392,349,294].forEach((f,i)=>tom(f,i*.18,.35,'sine',.14))},
+  destrava(){[784,988,1175,1568].forEach((f,i)=>tom(f,i*.1,.4,'sine',.14))}
+};
+
+/* ================== CONFETE ================== */
+const cv=document.getElementById('confete'), cx=cv.getContext('2d'); let parts=[], anim=null;
+function ajusta(){cv.width=innerWidth;cv.height=innerHeight} addEventListener('resize',ajusta); ajusta();
+function confete(n=140,x=innerWidth/2,y=innerHeight/3){
+  const cores=['#7c3aed','#ec4899','#f97316','#facc15','#22c55e','#3b82f6','#06b6d4'];
+  for(let i=0;i<n;i++) parts.push({x,y,vx:(Math.random()-.5)*14,vy:Math.random()*-12-3,r:Math.random()*7+4,c:cores[i%cores.length],a:Math.random()*6,va:(Math.random()-.5)*.3,vida:120+Math.random()*60});
+  if(!anim) loop();
+}
+function loop(){
+  cx.clearRect(0,0,cv.width,cv.height);
+  parts.forEach(p=>{p.vy+=.35;p.x+=p.vx;p.y+=p.vy;p.vx*=.99;p.a+=p.va;p.vida--;
+    cx.save();cx.translate(p.x,p.y);cx.rotate(p.a);cx.fillStyle=p.c;cx.fillRect(-p.r/2,-p.r/4,p.r,p.r/2);cx.restore();});
+  parts=parts.filter(p=>p.vida>0&&p.y<cv.height+40);
+  anim=parts.length?requestAnimationFrame(loop):(cx.clearRect(0,0,cv.width,cv.height),null);
+}
+
+/* ================== SALVAR PROGRESSO ================== */
+const KEY='semana-provas-lara-v2';
+let SAVE={};
+try{SAVE=JSON.parse(localStorage.getItem(KEY))||{};}catch(e){SAVE={};}
+try{const v1=JSON.parse(localStorage.getItem('aventura-palavras-lara-v1')); if(v1&&!SAVE.portugues) SAVE.portugues=v1;}catch(e){}
+let save=null;
+function grava(){try{localStorage.setItem(KEY,JSON.stringify(SAVE))}catch(e){}}
+function saveDe(m){ if(!SAVE[m.id]||SAVE[m.id].estrelas.length!==m.fases.length) SAVE[m.id]={estrelas:m.fases.map(()=>0),pontos:m.fases.map(()=>0)}; return SAVE[m.id]; }
+const liberada=i=>i===0||save.estrelas[i-1]>0;
+
+/* ================== NAVEGAÇÃO ================== */
+const $=id=>document.getElementById(id);
+function tela(n){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('on'));$('tela-'+n).classList.add('on');scrollTo({top:0,behavior:'smooth'});}
+document.addEventListener('click',e=>{
+  const t=e.target.closest('[data-som]'); if(t){somOn=!somOn;document.querySelectorAll('[data-som]').forEach(b=>b.textContent=somOn?'🔊':'🔇');SOM.clique();}
+  const ir=e.target.closest('[data-ir]'); if(ir){SOM.clique();if(ir.dataset.ir==='mapa')abreMapa();}
+});
+$('btn-jogar').onclick=()=>{ac();SOM.destrava();abreMaterias();};
+$('mapa-voltar').onclick=()=>{SOM.clique();abreMaterias();};
+$('mat-voltar').onclick=()=>{SOM.clique();tela('capa');};
+function abreMaterias(){
+  const box=$('materias'); box.innerHTML=''; let tot=0,max=0;
+  MATERIAS.forEach(m=>{
+    const sv=saveDe(m), est=sv.estrelas.reduce((a,b)=>a+b,0), mx=m.fases.length*3; tot+=est; max+=mx;
+    const c=document.createElement('div'); c.className='fase mat-card';
+    c.style.background=`linear-gradient(135deg,${m.cor},${m.cor2})`;
+    c.innerHTML=`<div class="ico">${m.ico}</div><div class="nome">${m.nome}</div><div class="desc">${m.fases.length} fases · simulado com ${m.sim.length} questões</div>
+      <div class="estrelas" style="font-size:16px">⭐ ${est} / ${mx}</div><div class="prog"><i style="width:${est/mx*100}%"></i></div>
+      <div class="acoes"><button>🎮 Jogar</button><a href="simulado.html#${m.id}">📝 Simulado</a></div>`;
+    c.querySelector('button').onclick=()=>{SOM.clique();abreMapa(m.id);};
+    c.querySelector('a').onclick=()=>SOM.clique();
+    box.appendChild(c);
+  });
+  $('mat-estrelas').textContent=tot+' / '+max;
+  tela('materias');
+}
+function escolheMateria(id){ MAT=MATERIAS.find(m=>m.id===id)||MATERIAS[0]; FASES=MAT.fases; save=saveDe(MAT); }
+
+let ultimaLiberada=-1;
+function abreMapa(id){
+  if(typeof id==='string'||!MAT) escolheMateria(typeof id==='string'?id:'portugues');
+  $('mapa-titulo').textContent=MAT.ico+' '+MAT.nome+' — Mapa das Fases';
+  $('mapa-sim').href='simulado.html#'+MAT.id;
+  const m=$('mapa'); m.innerHTML='';
+  $('tot-estrelas').textContent=save.estrelas.reduce((a,b)=>a+b,0)+' / '+FASES.length*3;
+  $('tot-pontos').textContent=save.pontos.reduce((a,b)=>a+b,0);
+  FASES.forEach((f,i)=>{
+    const lib=liberada(i), nova=lib&&save.estrelas[i]===0;
+    const b=document.createElement('button');
+    b.className='fase'+(lib?'':' trancada')+(nova?' nova':'');
+    b.style.background=`linear-gradient(135deg,${f.cor},${f.cor2})`;
+    const est=[0,1,2].map(k=>k<save.estrelas[i]?'⭐':'☆').join('');
+    const r=i/(FASES.length-1), nivel=i===FASES.length-1?'👑 Mestre':r<.3?'🟢 Fácil':r<.6?'🟡 Médio':'🔴 Difícil';
+    b.innerHTML=`<div class="num">${i+1}</div><div class="ico">${f.ico}</div><div class="nome">${f.nome}</div><div class="desc">${f.desc}</div><span class="nivel">${nivel}</span><div class="estrelas">${est}</div>`;
+    b.onclick=()=>{ if(!lib){SOM.errado();fala('Termine a fase anterior para destravar esta! 🔒');return;} SOM.clique(); abreResumo(i); };
+    m.appendChild(b);
+  });
+  tela('mapa');
+}
+function fala(txt){ /* aviso rápido */
+  const d=document.createElement('div'); d.className='chip'; d.style.cssText='position:fixed;left:50%;top:18px;transform:translateX(-50%);z-index:60;font-size:16px';
+  d.textContent='🦉 '+txt; document.body.appendChild(d); setTimeout(()=>d.remove(),2200);
+}
+
+/* ================== RESUMO ================== */
+let faseAtual=0;
+function abreResumo(i){
+  faseAtual=i; const f=FASES[i];
+  $('res-ico').textContent=f.ico; $('res-nome').textContent=`Fase ${i+1}: ${f.nome}`;
+  $('res-caixas').innerHTML=f.resumo.map(r=>`<div class="caixa" style="border-color:${r.c}"><b style="color:${r.c}">${r.t}</b>${r.d}<div class="ex">${r.ex}</div></div>`).join('');
+  tela('resumo');
+}
+$('btn-comecar').onclick=()=>{SOM.clique();iniciaFase(faseAtual);};
+
+/* ================== QUIZ ================== */
+let J={};
+const embaralha=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
+const CORES_LETRA=['#7c3aed','#ec4899','#f97316','#06b6d4'];
+const ELOGIOS=['Arrasou! 🎉','Muito bem! 🌟','Isso aí, Lara! 💪','Que gênia! 🧠','Mandou bem! 🚀','Perfeito! ✨'];
+const CONSOLOS=['Quase! Vamos aprender 💜','Não foi dessa vez…','Opa! Olha a explicação 👀','Errar faz parte de aprender!'];
+
+function iniciaFase(i){
+  J={f:i,i:0,vidas:3,dicas:3,cortes:1,pontos:0,seq:0,erros:0,acertos:0,erradas:[]};
+  $('q-fase').textContent=FASES[i].ico+' '+FASES[i].nome;
+  tela('quiz'); mostraPergunta();
+}
+function mostraPergunta(){
+  const f=FASES[J.f], q=f.qs[J.i];
+  J.usouDica=false; J.respondida=false;
+  $('q-barra').style.width=(J.i/f.qs.length*100)+'%';
+  $('q-vidas').textContent='❤️'.repeat(J.vidas)+'🤍'.repeat(3-J.vidas);
+  $('q-pontos').textContent=J.pontos;
+  const n=f.qs.length, pos=J.i/n;
+  const dif=pos<1/3?['🟢 Fácil','#22c55e']:pos<2/3?['🟡 Médio','#eab308']:['🔴 Difícil','#ef4444'];
+  $('q-tags').innerHTML=`<span class="tag" style="background:${f.cor}">Pergunta ${J.i+1} de ${n}</span><span class="tag" style="background:${dif[1]}">${dif[0]}</span>`+(J.seq>=2?`<span class="tag" style="background:#f97316">🔥 ${J.seq} seguidas!</span>`:'');
+  $('q-texto').innerHTML=q.q;
+  $('q-visual').innerHTML=q.v?VIS[q.v]:'';
+  $('q-dica').classList.add('hidden');
+  const ops=embaralha(q.o.map((t,k)=>({t,ok:k===0})));
+  const box=$('q-opcoes'); box.innerHTML='';
+  ops.forEach((o,k)=>{
+    const b=document.createElement('button'); b.className='op'; b.dataset.ok=o.ok?'1':'0';
+    b.innerHTML=`<span class="letra" style="background:${CORES_LETRA[k]}">${'ABCD'[k]}</span><span>${o.t}</span>`;
+    b.onclick=ev=>responde(b,ev); box.appendChild(b);
+  });
+  atualizaAjudas();
+}
+function atualizaAjudas(){
+  $('n-dicas').textContent=J.dicas; $('n-50').textContent=J.cortes;
+  $('btn-dica').disabled=J.dicas<=0||J.usouDica||J.respondida;
+  $('btn-50').disabled=J.cortes<=0||J.respondida;
+}
+$('btn-dica').onclick=()=>{
+  if(J.dicas<=0||J.usouDica||J.respondida) return;
+  J.dicas--; J.usouDica=true; SOM.dica();
+  $('q-dica-txt').innerHTML='<b>Dica:</b> '+FASES[J.f].qs[J.i].h;
+  $('q-dica').classList.remove('hidden'); atualizaAjudas();
+};
+$('btn-50').onclick=()=>{
+  if(J.cortes<=0||J.respondida) return;
+  J.cortes--; SOM.corte();
+  embaralha([...document.querySelectorAll('.op[data-ok="0"]')]).slice(0,2).forEach(b=>{b.classList.add('sumiu');b.disabled=true;});
+  atualizaAjudas();
+};
+function responde(btn,ev){
+  if(J.respondida) return; J.respondida=true;
+  const q=FASES[J.f].qs[J.i], ok=btn.dataset.ok==='1';
+  document.querySelectorAll('.op').forEach(b=>b.disabled=true);
+  if(ok){
+    btn.classList.add('certa'); SOM.certo();
+    const pts=(J.usouDica?50:100)+J.seq*20; J.pontos+=pts; J.seq++; J.acertos++;
+    const p=document.createElement('div'); p.className='pontos-voa'; p.textContent='+'+pts;
+    p.style.left=(ev.clientX-20)+'px'; p.style.top=(ev.clientY-30)+'px'; document.body.appendChild(p); setTimeout(()=>p.remove(),1000);
+    confete(40,ev.clientX,ev.clientY);
+    feedback(true,ELOGIOS[Math.floor(Math.random()*ELOGIOS.length)],q.e);
+  }else{
+    btn.classList.add('errada'); SOM.errado();
+    document.querySelector('.op[data-ok="1"]').classList.add('certa');
+    J.vidas--; J.erros++; J.seq=0; J.erradas.push({q:q.q,r:q.o[0],e:q.e});
+    $('q-vidas').textContent='❤️'.repeat(J.vidas)+'🤍'.repeat(3-J.vidas);
+    feedback(false,CONSOLOS[Math.floor(Math.random()*CONSOLOS.length)],'Resposta certa: <b>'+q.o[0]+'</b>. '+q.e);
+  }
+  $('q-pontos').textContent=J.pontos; atualizaAjudas();
+}
+function feedback(ok,tit,exp){
+  const fb=$('feedback'); fb.className='feedback on '+(ok?'ok':'nok');
+  $('fb-emoji').textContent=ok?'🦉🎉':'🦉💜'; $('fb-titulo').textContent=tit; $('fb-exp').innerHTML=exp;
+  $('fb-continuar').className='btn '+(ok?'verde':'laranja');
+  $('fb-continuar').textContent=(J.vidas<=0)?'Ver resultado ➜':(J.i+1>=FASES[J.f].qs.length?'Ver resultado 🏁':'Continuar ➜');
+}
+$('fb-continuar').onclick=()=>{
+  SOM.clique(); $('feedback').classList.remove('on');
+  if(J.vidas<=0) return fim(false);
+  J.i++; if(J.i>=FASES[J.f].qs.length) return fim(true);
+  mostraPergunta();
+};
+$('quiz-sair').onclick=()=>{SOM.clique();pergunta('Quer sair da fase? Seu progresso nesta fase será perdido.',()=>{ $('feedback').classList.remove('on'); abreMapa(); });};
+
+/* ================== RESULTADO ================== */
+function fim(passou){
+  $('q-barra').style.width='100%';
+  const i=J.f, f=FASES[i], estrelas=passou?Math.max(1,3-J.erros):0;
+  const eraTrancada=i+1<FASES.length&&!liberada(i+1);
+  if(passou){ save.estrelas[i]=Math.max(save.estrelas[i],estrelas); save.pontos[i]=Math.max(save.pontos[i],J.pontos); grava(); }
+  const destravou=passou&&eraTrancada&&i+1<FASES.length;
+  $('r-titulo').textContent=passou?(estrelas===3?'PERFEITO! 🏆':'Fase concluída! 🎉'):'Ops, acabaram as vidas!';
+  $('r-mascote').textContent=passou?'🦉':'🦉';
+  $('r-msg').innerHTML=passou
+    ?(i===FASES.length-1?`Lara, você é a <b>${MAT.titulo}</b>! Pronta para a prova de ${MAT.nome}! 👑`:destravou?`Você destravou a fase <b>${FASES[i+1].ico} ${FASES[i+1].nome}</b>! 🔓`:'Mandou muito bem!')
+    :'Respire fundo, leia a Caixinha do Resumo e tente de novo. Você consegue! 💪';
+  $('r-placar').innerHTML=`<div class="chip">✅ ${J.acertos} acertos</div><div class="chip">❌ ${J.erros} erros</div><div class="chip">🏆 ${J.pontos} pontos</div>`;
+  const spans=[...$('r-estrelas').children]; spans.forEach(s=>s.classList.remove('acesa'));
+  tela('resultado');
+  spans.forEach((s,k)=>{ if(k<estrelas) setTimeout(()=>{s.classList.add('acesa');tom(700+k*200,0,.25,'triangle',.15);},400+k*350); });
+  if(passou){ setTimeout(()=>{SOM.vitoria();confete(180);},300); if(destravou) setTimeout(()=>{SOM.destrava();fala('Nova fase desbloqueada! 🔓');},1800); }
+  else SOM.perdeu();
+  const bt=$('r-botoes'); bt.innerHTML='';
+  const mk=(txt,cls,fn)=>{const b=document.createElement('button');b.className='btn pequeno '+cls;b.innerHTML=txt;b.onclick=()=>{SOM.clique();fn();};bt.appendChild(b);};
+  if(passou&&i+1<FASES.length) mk('Próxima fase ➜','verde',()=>abreResumo(i+1));
+  mk('🔁 Jogar de novo','laranja',()=>iniciaFase(i));
+  mk('📖 Ver resumo','branco',()=>abreResumo(i));
+  mk('🗺️ Mapa','',abreMapa);
+  $('r-revisao').innerHTML=J.erradas.length?'<h3 style="text-align:center;margin-top:6px">📝 Vamos revisar o que errou:</h3>'+J.erradas.map(x=>`<div class="item"><div>${x.q}</div><div class="r">✅ ${x.r}</div><div style="font-size:15px;margin-top:2px">${x.e}</div></div>`).join(''):'';
+}
+
+/* ================== MODAL ================== */
+let acaoModal=null;
+function pergunta(txt,fn){$('modal-txt').textContent=txt;acaoModal=fn;$('modal').classList.add('on');}
+$('modal-nao').onclick=()=>{SOM.clique();$('modal').classList.remove('on');};
+$('modal-sim').onclick=()=>{SOM.clique();$('modal').classList.remove('on');acaoModal&&acaoModal();};
+$('btn-reset').onclick=()=>{SOM.clique();pergunta('Apagar as estrelas desta matéria e começar do zero?',()=>{SAVE[MAT.id]=null;save=saveDe(MAT);grava();abreMapa();});};
+</script>
+</body>
+</html>
