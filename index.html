@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Semana de Provas da Lara</title>
+<title>Semana de Prova Toth 3º A</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
@@ -179,9 +179,9 @@ canvas#confete{position:fixed;inset:0;pointer-events:none;z-index:50}
     <div class="topo" style="justify-content:flex-end"><button class="iconbtn" data-som title="Som">🔊</button></div>
     <div class="capa">
       <div class="mascote">🦉</div>
-      <h1 class="logo">Semana de<br><span>Provas</span> da Lara</h1>
+      <h1 class="logo">Semana de Prova<br><span>Toth</span> 3º A</h1>
       <p class="sub">Jogos e simulados para arrasar em todas as provas! ✨</p>
-      <div class="balao" style="margin-top:20px">Oi, Lara! Eu sou a <b>Coruja Sabidinha</b>. 🦉<br>Escolha a matéria, passe pelas fases, ganhe estrelas ⭐ e faça o <b>simulado</b> no final!</div>
+      <div class="balao" style="margin-top:20px">Oi, turma do 3º A! Eu sou a <b>Coruja Sabidinha</b>. 🦉<br>Escolha a matéria, passe pelas fases, ganhe estrelas ⭐ e faça o <b>simulado</b> no final!</div>
       <br>
       <button class="btn grande verde" id="btn-jogar">▶ Jogar!</button>
     </div>
@@ -402,7 +402,7 @@ $('btn-comecar').onclick=()=>{SOM.clique();iniciaFase(faseAtual);};
 let J={};
 const embaralha=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
 const CORES_LETRA=['#7c3aed','#ec4899','#f97316','#06b6d4'];
-const ELOGIOS=['Arrasou! 🎉','Muito bem! 🌟','Isso aí, Lara! 💪','Que gênia! 🧠','Mandou bem! 🚀','Perfeito! ✨'];
+const ELOGIOS=['Arrasou! 🎉','Muito bem! 🌟','Isso aí! 💪','Que cabeça boa! 🧠','Mandou bem! 🚀','Perfeito! ✨'];
 const CONSOLOS=['Quase! Vamos aprender 💜','Não foi dessa vez…','Opa! Olha a explicação 👀','Errar faz parte de aprender!'];
 
 function iniciaFase(i){
@@ -492,7 +492,7 @@ function fim(passou){
   $('r-titulo').textContent=passou?(estrelas===3?'PERFEITO! 🏆':'Fase concluída! 🎉'):'Ops, acabaram as vidas!';
   $('r-mascote').textContent=passou?'🦉':'🦉';
   $('r-msg').innerHTML=passou
-    ?(i===FASES.length-1?`Lara, você é a <b>${MAT.titulo}</b>! Pronta para a prova de ${MAT.nome}! 👑`:destravou?`Você destravou a fase <b>${FASES[i+1].ico} ${FASES[i+1].nome}</b>! 🔓`:'Mandou muito bem!')
+    ?(i===FASES.length-1?`Você é ${MAT.artigo||'a'} <b>${MAT.titulo}</b>! Preparado(a) para a prova de ${MAT.nome}! 👑`:destravou?`Você destravou a fase <b>${FASES[i+1].ico} ${FASES[i+1].nome}</b>! 🔓`:'Mandou muito bem!')
     :'Respire fundo, leia a Caixinha do Resumo e tente de novo. Você consegue! 💪';
   $('r-placar').innerHTML=`<div class="chip">✅ ${J.acertos} acertos</div><div class="chip">❌ ${J.erros} erros</div><div class="chip">🏆 ${J.pontos} pontos</div>`;
   const spans=[...$('r-estrelas').children]; spans.forEach(s=>s.classList.remove('acesa'));

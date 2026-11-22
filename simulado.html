@@ -130,7 +130,7 @@ canvas#confete{position:fixed;inset:0;pointer-events:none;z-index:50}
 
   <div class="folha cab">
     <div style="font-size:14px;font-weight:600;opacity:.7" id="cab-sub">AVALIAÇÃO — TREINO · 4º BIMESTRE</div>
-    <h1 id="cab-tit">Simulado da <span>Turma</span> ✏️</h1>
+    <h1 id="cab-tit">Simulado do <span>3º A</span> ✏️</h1>
     <div id="escolha" class="escolha"></div>
     <div class="campos">
       <div class="campo"><label>Nome:</label><input id="nome" placeholder="Escreva seu nome" autocomplete="off"></div>
@@ -262,7 +262,7 @@ function corrige(){
     const db=$('db'+i);if(db)db.hidden=true;
   });
   const nota=acertos, nome=$('nome').value.trim().split(' ')[0];
-  const [selo,cor,msg]=nota>=9?['EXCELENTE! 🏆','#16a34a',`Parabéns, ${nome}! Você está prontíssima para a prova!`]:
+  const [selo,cor,msg]=nota>=9?['EXCELENTE! 🏆','#16a34a',`Parabéns, ${nome}! Você está preparadíssimo(a) para a prova!`]:
     nota>=7?['MUITO BOM! 🌟','#2563eb',`Mandou bem, ${nome}! Revise as questões em vermelho e vai gabaritar.`]:
     nota>=5?['ESTÁ CHEGANDO! 💪','#ea580c',`Bom esforço, ${nome}! Jogue as fases do jogo e tente de novo.`]:
     ['VAMOS TREINAR! 📚','#dc2626',`Sem problema, ${nome}! Jogue as fases com a Coruja e volte aqui.`];

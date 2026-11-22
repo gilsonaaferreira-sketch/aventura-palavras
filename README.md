@@ -1,4 +1,4 @@
-# 🦉 Semana de Provas — 4º bimestre
+# 🦉 Semana de Prova Toth 3º A — 4º bimestre
 
 Jogos e simulados para estudar para as provas, com a Coruja Sabidinha.
 

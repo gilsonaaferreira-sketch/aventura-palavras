@@ -35,8 +35,8 @@ const VIS = {
 const FASES_PT = [
  { nome:"Quem é o Sujeito?", ico:"🙋‍♀️", cor:"#3b82f6", cor2:"#06b6d4", desc:"Descubra de quem a frase fala",
    resumo:[
-    {t:"O que é o sujeito?",d:"É o ser (pessoa, bicho ou coisa) sobre quem a frase fala alguma coisa.",ex:"<b>A Lara</b> estuda muito.",c:"#3b82f6"},
-    {t:"Truque da pergunta",d:"Pergunte ao verbo: <b>QUEM</b> ou <b>O QUE</b> + verbo?",ex:"Quem estuda? → A Lara",c:"#8b5cf6"},
+    {t:"O que é o sujeito?",d:"É o ser (pessoa, bicho ou coisa) sobre quem a frase fala alguma coisa.",ex:"<b>A Bia</b> estuda muito.",c:"#3b82f6"},
+    {t:"Truque da pergunta",d:"Pergunte ao verbo: <b>QUEM</b> ou <b>O QUE</b> + verbo?",ex:"Quem estuda? → A Bia",c:"#8b5cf6"},
     {t:"Núcleo do sujeito",d:"É a palavra mais importante dentro do sujeito.",ex:"O <b>gato</b> preto dormiu.",c:"#06b6d4"}],
    qs:[
     {q:"O <b>sujeito</b> de uma frase é…",o:["O ser sobre quem a frase fala alguma coisa","A ação que acontece na frase","O lugar onde tudo acontece","O sinal de pontuação do final"],h:"Pense: de QUEM a frase está falando?",e:"O sujeito é o ser (pessoa, animal ou coisa) sobre o qual se declara algo."},
@@ -66,7 +66,7 @@ const FASES_PT = [
    ]},
  { nome:"Pegando o Predicado", ico:"🎯", cor:"#f97316", cor2:"#fb923c", desc:"Tudo o que se diz do sujeito",
    resumo:[
-    {t:"O que é o predicado?",d:"É <b>tudo o que se diz</b> sobre o sujeito.",ex:"A Lara | <b>estuda para a prova</b>.",c:"#f97316"},
+    {t:"O que é o predicado?",d:"É <b>tudo o que se diz</b> sobre o sujeito.",ex:"A Bia | <b>estuda para a prova</b>.",c:"#f97316"},
     {t:"O verbo mora aqui",d:"O predicado quase sempre tem um <b>verbo</b>.",ex:"Os pássaros <b>voaram</b> para o sul.",c:"#ef4444"},
     {t:"Dica esperta",d:"Ache o sujeito primeiro. O que sobrar é o predicado!",ex:"O sol | brilha forte.",c:"#eab308"}],
    qs:[
@@ -74,7 +74,7 @@ const FASES_PT = [
     {q:"Em <em>“O sol brilha forte.”</em>, qual é o predicado?",o:["brilha forte","O sol","sol brilha","forte"],h:"Primeiro ache o sujeito (o que brilha?). O resto é o predicado.",e:"Sujeito: “O sol”. Predicado: “brilha forte”."},
     {q:"Que palavra quase sempre aparece no predicado?",o:["O verbo","O artigo","O ponto de exclamação","O nome próprio"],h:"É a palavra que indica ação, estado ou fenômeno.",e:"O verbo é a peça principal do predicado."},
     {q:"Em <em>“As crianças brincavam no quintal.”</em>, qual é o predicado?",o:["brincavam no quintal","As crianças","no quintal","As crianças brincavam"],h:"Quem brincava? Tire essa parte e veja o que sobra.",e:"Sujeito: “As crianças”. Predicado: “brincavam no quintal”."},
-    {q:"Qual é a divisão correta entre <b>sujeito | predicado</b>?",o:["A Lara | estuda para a prova.","A Lara estuda | para a prova.","A | Lara estuda para a prova.","A Lara estuda para | a prova."],h:"O sujeito é “quem estuda”. O verbo fica no predicado.",e:"Sujeito: “A Lara”. Predicado: “estuda para a prova”."},
+    {q:"Qual é a divisão correta entre <b>sujeito | predicado</b>?",o:["A Bia | estuda para a prova.","A Bia estuda | para a prova.","A | Bia estuda para a prova.","A Bia estuda para | a prova."],h:"O sujeito é “quem estuda”. O verbo fica no predicado.",e:"Sujeito: “A Bia”. Predicado: “estuda para a prova”."},
     {q:"Em <em>“A professora explicou a lição com calma.”</em>, qual é o predicado?",o:["explicou a lição com calma","A professora","com calma","a lição"],h:"O predicado começa no verbo “explicou” e vai até o fim.",e:"Tudo que se diz da professora: “explicou a lição com calma”."},
     {q:"Qual é o <b>verbo</b> do predicado em <em>“Os pássaros voaram para o sul.”</em>?",o:["voaram","pássaros","sul","para"],h:"Qual palavra indica a ação?",e:"“Voaram” é o verbo — a ação que os pássaros fizeram."},
     {q:"Em <em>“Chegaram os convidados da festa.”</em>, qual é o predicado?",o:["Chegaram","os convidados da festa","Chegaram os convidados","da festa"],h:"O sujeito veio depois do verbo! Quem chegou?",e:"Sujeito: “os convidados da festa” (veio depois). Predicado: “Chegaram”."}
@@ -131,7 +131,7 @@ const FASES_PT = [
    resumo:[
     {t:"Mistura total!",d:"Perguntas de <b>todas as fases</b>, mais difíceis.",ex:"Sujeito + Predicado + Dígrafo + Gráfico + Teatro",c:"#eab308"},
     {t:"Lembre",d:"Plural não é composto. O sujeito pode vir depois do verbo.",ex:"Chegaram <b>os primos</b>.",c:"#ec4899"},
-    {t:"Calma e atenção",d:"Leia duas vezes antes de responder. Use as dicas com sabedoria! 💡",ex:"Você consegue, Lara! 💪",c:"#22c55e"}],
+    {t:"Calma e atenção",d:"Leia duas vezes antes de responder. Use as dicas com sabedoria! 💡",ex:"Você consegue! 💪",c:"#22c55e"}],
    qs:[
     {q:"<em>“Os alunos e a professora fizeram uma peça de teatro.”</em> O sujeito é…",o:["Composto (alunos, professora)","Simples (alunos)","Simples (professora)","Oculto"],h:"Quantos núcleos há antes do verbo?",e:"Dois núcleos: alunos e professora → composto."},
     {q:"Em <em>“O filho do padeiro trouxe pães quentinhos.”</em>, o predicado é…",o:["trouxe pães quentinhos","O filho do padeiro","pães quentinhos","do padeiro"],h:"Ache o verbo e vá até o fim.",e:"Sujeito: “O filho do padeiro”. Predicado: “trouxe pães quentinhos”."},
@@ -159,8 +159,8 @@ const SIM_PT = [
   alts:["Composto, porque está no plural","Simples, com o núcleo “alunos”","Composto, com os núcleos “alunos” e “cartaz”","Oculto"],a:1,
   dica:"Plural não quer dizer composto! Quantos núcleos existem?",exp:"Só um núcleo (alunos): sujeito simples."},
  {tipo:"pintar",ass:"Predicado",enun:"🖍️ <b>Pinte</b> o <b>predicado</b> da frase:",
-  pecas:["Lara","estuda","para","a","prova","de","Português."],certas:[1,2,3,4,5,6],
-  dica:"Primeiro ache o sujeito. Tudo o que sobra é o predicado!",exp:"Sujeito: “Lara”. Predicado: “estuda para a prova de Português”."},
+  pecas:["Bia","estuda","para","a","prova","de","Português."],certas:[1,2,3,4,5,6],
+  dica:"Primeiro ache o sujeito. Tudo o que sobra é o predicado!",exp:"Sujeito: “Bia”. Predicado: “estuda para a prova de Português”."},
  {tipo:"escrever",ass:"Dígrafos",enun:"✏️ <b>Escreva</b> o dígrafo da palavra <em>“chuva”</em>.",
   aceita:["ch"],dica:"São duas letras que juntas fazem um som só, no começo da palavra.",exp:"O dígrafo é “ch”."},
  {tipo:"pintar",ass:"Dígrafos",letras:true,enun:"🖍️ <b>Pinte as letras</b> que formam os <b>dígrafos</b> da palavra <em>passarinho</em>:",
@@ -380,7 +380,7 @@ const FASES_MAT = [
     {q:"Para achar a <b>terça parte</b>, dividimos por…",o:["3","2","4","30"],h:"Terça lembra três.",e:"Terça parte é dividir por 3."},
     {q:"Quanto é a terça parte de 9?",o:["3","6","27","4"],h:"9 ÷ 3",e:"9 ÷ 3 = 3."},
     {q:"Quanto é a <b>quarta parte</b> de 20?",o:["5","4","10","80"],h:"20 ÷ 4",e:"20 ÷ 4 = 5."},
-    {q:"Lara tem 12 balas e deu a <b>metade</b> para o irmão. Quantas balas o irmão ganhou?",o:["6","4","3","24"],h:"12 ÷ 2",e:"12 ÷ 2 = 6 balas."},
+    {q:"Bia tem 12 balas e deu a <b>metade</b> para o irmão. Quantas balas o irmão ganhou?",o:["6","4","3","24"],h:"12 ÷ 2",e:"12 ÷ 2 = 6 balas."},
     {q:"Uma pizza de 8 pedaços foi dividida em 4 partes iguais. Quantos pedaços tem cada parte?",o:["2","4","8","32"],h:"8 ÷ 4",e:"8 ÷ 4 = 2 pedaços."},
     {q:"Quanto é a terça parte de 30?",o:["10","3","15","90"],h:"30 ÷ 3",e:"30 ÷ 3 = 10."}
    ]},
@@ -484,9 +484,9 @@ const SIM_MAT = [
 
 
 const MATERIAS = [
- {id:"portugues", nome:"Português", ico:"📖", cor:"#7c3aed", cor2:"#ec4899", titulo:"Mestre das Palavras", fases:FASES_PT, sim:SIM_PT},
- {id:"historia",  nome:"História",  ico:"🏛️", cor:"#b45309", cor2:"#f59e0b", titulo:"Guardiã da História", fases:FASES_HIST, sim:SIM_HIST},
- {id:"ciencias",  nome:"Ciências",  ico:"🌍", cor:"#2563eb", cor2:"#06b6d4", titulo:"Exploradora do Universo", fases:FASES_CIEN, sim:SIM_CIEN},
- {id:"geografia", nome:"Geografia", ico:"🌳", cor:"#16a34a", cor2:"#4ade80", titulo:"Protetora do Planeta", fases:FASES_GEO, sim:SIM_GEO},
- {id:"matematica",nome:"Matemática",ico:"➗", cor:"#dc2626", cor2:"#f97316", titulo:"Craque da Divisão", fases:FASES_MAT, sim:SIM_MAT}
+ {id:"portugues", nome:"Português", ico:"📖", cor:"#7c3aed", cor2:"#ec4899", titulo:"Mestre das Palavras", artigo:"um(a)", fases:FASES_PT, sim:SIM_PT},
+ {id:"historia",  nome:"História",  ico:"🏛️", cor:"#b45309", cor2:"#f59e0b", titulo:"Guardião da História", artigo:"um(a)", fases:FASES_HIST, sim:SIM_HIST},
+ {id:"ciencias",  nome:"Ciências",  ico:"🌍", cor:"#2563eb", cor2:"#06b6d4", titulo:"Explorador(a) do Universo", artigo:"um(a)", fases:FASES_CIEN, sim:SIM_CIEN},
+ {id:"geografia", nome:"Geografia", ico:"🌳", cor:"#16a34a", cor2:"#4ade80", titulo:"Protetor(a) do Planeta", artigo:"um(a)", fases:FASES_GEO, sim:SIM_GEO},
+ {id:"matematica",nome:"Matemática",ico:"➗", cor:"#dc2626", cor2:"#f97316", titulo:"Craque da Divisão", artigo:"um(a)", fases:FASES_MAT, sim:SIM_MAT}
 ];
